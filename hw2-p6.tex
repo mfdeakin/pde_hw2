@@ -1,0 +1,26 @@
+Consider the following general parabolic equation
+$$
+L[u] = a(x, t) u_{xx} + b(x, t) u_x + c(x, t) u - u_t
+$$
+where
+$$
+0 < C_1 < a(x, t) < C_2, |b(x, t)| \leq C_3, c(x, t) \leq C_4
+$$
+\begin{enumerate}
+\item
+  Show that $L[u] \geq 0$, then
+  $$
+  \max \limits_{\closure{\domain}_T} u \leq e^{C_4 T} \max \limits_{\partial' \domain_T} u^+
+  $$
+  Here $\domain_T = (0, L) \times (0, T), \bndrydom_T = \bndrydom_T \setminus ((0, L) \times \set{T})$, and $u^+ = \max(u, 0)$.\\
+  (Hint: Consider the function $v := u e^{-C_4 t}$)
+\item
+  Prove the uniqueness of the initial value problem
+  $$
+  \begin{cases}
+    L u(x, t) = f(, t) & x \in \domain_T\\
+    u(x, 0) = \phi(x) & x \in \domain\\
+    u(x, t) = g(x, t) & x \in \bndrydom, t \in (0, T]
+  \end{cases}
+  $$
+\end{enumerate}

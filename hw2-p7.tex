@@ -1,0 +1,34 @@
+\begin{enumerate}
+\item
+  Use d'Alembert's formula to show that the Maximum Principle does not hold for wave equation, i.e., $\exists$ $u$ satisfying
+  $$
+  \begin{cases}
+    u_{tt} = u_{xx}, & -L < x < L, 0 < t < T\\
+    u(x, 0) = f(x)\\
+    u_t(x, 0) = g(x)
+  \end{cases}
+  $$
+  s.t.
+  $$
+  \max \limits_{\closure{U}_T} > \max \limits_{\partial' U_T} u(x, t)
+  $$
+  (Hint: Let $f = 0$ and $g \in C_0^\infty([-1, 1]), g \geq 0$ and choose a small $T$.
+\item
+  Let $u$ solve the initial value problem for the wave equation in one dimension
+  $$
+  \begin{cases}
+    u_{tt} = u_{xx} & \text{in} \reals \times (0, +\infty)\\
+    u(x, 0) = f(x)\\
+    u_t(x, 0) = g(x)
+  \end{cases}
+  $$
+  where $f$ and $g$ have compact support in $\reals$.
+  Let $k(t) = \frac{1}{2} \int u_t(x, t)^2 \dt$ be the potential energy and $p(t) = \frac{1}{2} u_x^2(x, t) \dx$ be the potential energy.
+  Show that
+  \begin{enumerate}
+  \item
+    $k(t) + p(t)$ is constant in $t$
+  \item
+    $k(t) = p(t)$ for all large enough time $t$
+  \end{enumerate}
+\end{enumerate}

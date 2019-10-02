@@ -1,0 +1,27 @@
+Let
+$$
+\Phi(x - y, t) = (4 \pi t)^{-n / 2} e^{-\frac{|x - y|^2}{4t}}
+$$
+\begin{enumerate}
+\item Show that there exists a generic constant $C_n$ s.t.
+  $$
+  \Phi(x - y, t) \leq C_n |x - y|^{-n}
+  $$
+  (Hint: Maximize the function in $t$)
+\item
+  Let $n = 1$ and $f(x)$ be a bounded measurable function s.t. $f(x_0 -)$ and $f(x_0+)$ exists.
+  Show that
+  $$
+  \lim \limits_{t \rightarrow 0} \int_R \Phi(x  - x_0, t) f(y) dy = \frac{1}{2} (f(x_0-) + f(x_0+))
+  $$
+\item
+  Let $u$ satisfy
+  $$
+  \begin{cases}
+    u_t = \Delta u & x \in \reals^n, t > 0\\
+    u(x, 0) = f(x)
+  \end{cases}
+  $$
+  Suppose that $f$ is continuous and has compact support.
+  Show that $\lim \limits_{t \rightarrow +\infty} u(x, t) = 0$ for all $x$
+\end{enumerate}
