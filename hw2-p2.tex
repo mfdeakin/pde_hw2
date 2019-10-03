@@ -2,13 +2,63 @@
 \item
   Show that the problem of minimizing energy
   $$
-  I[u] = \int_J x^2 |u(x)|^2 \dx
+  I[u] = \int_J x^2 |u'(x)|^2 \dx
   $$
-  for $u \in C(\closure{J})$ with piecewise continuous derivatives in $J := (-1, 1)$, satisfying the boundary conditions $u(-1) = 0$, $u(1) = 1$ is not attained.
+  for $u \in C(\closure{J})$ with piecewise continuous derivatives in $J := (-1, 1)$,
+  satisfying the boundary conditions $u(-1) = 0$, $u(1) = 1$ is not attained.
+
+  Consider
+  $$
+  u_k(x) =
+  \begin{cases}
+    0 & -1 \leq x \leq -\frac{1}{k}\\
+    \frac{k^2}{2} x^2 + k x + \frac{1}{2} & -\frac{1}{k} \leq x \leq 0\\
+    -\frac{k^2}{2} x^2 + k x + \frac{1}{2} & 0 \leq x \leq \frac{1}{k}\\
+    1 & \frac{1}{k} \leq x \leq 1\\
+  \end{cases}
+  $$
+
+  $u_k$ has piecewise continuous derivatives, is $0$ at $-1$ and $1$ at $1$.
+  Furthermore, $I[u_k] \leq \frac{C}{k}$ for some positive $C$ indepenedent of $k$,
+  and thus, $\lim \limits_{k \rightarrow \infty} I[u_k] = 0$ is our minimal energy.
+  However, $\lim \limits_{k \rightarrow \infty} u_k$ does not have piecewise continuous derivatives though, so it's not in the admissible set.
+  Thus, $\inf_{u} I[u] = 0$.
+
+  Next we want to show that $I[u] > 0$ for any element in the admissible set.
+  By the intermediate value theorem, since $u(-1) = 0$ and $u(1) = 1$, there is some $y \in (-1, 1)$ s.t. $u'(y) = \frac{1}{2}$.
+  Then since $u'(x)$ is piecewise continuous, we can choose some $\delta > 0$ s.t. $0 < \epsilon < u'(x)$ whenever $|x - y| < \delta$.
+  Then $\int \limits_{-1}^{1} x^2 u'(x)^2 \dx \geq \int \limits_{y - \delta}^{y + \delta} x^2 \epsilon^2 \dx > 0$.
+  Thus, since the optimal energy is $0$, and any element in the admissible set has non-zero energy, the minimizer is not attained.
+
 \item
   Consider the problem of minimizing the energy
   $$
   I[u] = \int_0^1 (1 + |u'(x)|^2)^{\frac{1}{4}} \dx
   $$
   for all $u \in C^1((0, 1)) \cap C([0, 1])$ satisfying $u(0) = 0, u(1) = 1$. Show that the minimum is $1$ and is not attained.
+
+  Consider
+  $$
+  u_k(x) =
+  \begin{cases}
+    -k^2 x^2 + 2 k x & 0 \leq x \leq \frac{1}{k}\\
+    1 & \frac{1}{k} \leq x \leq 1\\
+  \end{cases}
+  $$
+
+  $u_k$ has piecewise continuous derivatives, is $0$ at $0$ and $1$ at $1$.
+  Furthermore, $I[u_k] \leq \frac{k - 1}{k} + \frac{(1 + 4 k^2)^{1/4}}{k}$,
+  and thus, $\lim \limits_{k \rightarrow \infty} I[u_k] = 1$ is our minimal energy.
+  However, $\lim \limits_{k \rightarrow \infty} u_k$ does not have piecewise continuous derivatives though, so it's not in the admissible set.
+  Thus, $\inf_{u} I[u] = 1$.
+
+  Next we want to show that $I[u] > 0$ for any element in the admissible set; this is largely the same as in 2a.
+  By the intermediate value theorem, since $u(0) = 0$ and $u(1) = 1$, there is some $y \in (0, 1)$ s.t. $u'(y) = 1$.
+  Then since $u'(x)$ is piecewise continuous, we can choose some $\delta > 0$ s.t. $0 < \epsilon < u'(x)$ whenever $|x - y| < \delta$.
+  Then
+  $$
+  \int \limits_{0}^{1} (1 + u'(x)^2)^{1/4} \dx \geq \int \limits_{y - \delta}^{y + \delta} (1 + \epsilon^2)^{1/4} \dx + 1 - 2 \delta
+  = 1 - 2 \delta + 2 \delta (1 + \epsilon^2)^{1/4} > 1
+  $$
+  Thus, since the optimal energy is $1$, and any element in the admissible set has energy greater than 1, the minimizer is not attained.
 \end{enumerate}
