@@ -1,9 +1,48 @@
 \begin{enumerate}
 \item
-  Let $\xi \in \bndrydom$ and $w(x)$ be a barrier on $\domain_1 \subset \subset \domain$ with $w$ superharmonic in $\domain_1$, $w > 0$
+  Let $\xi \in \bndrydom$ and $w(x)$ be a barrier on $\domain_1 \compactcont \domain$ with $w$ superharmonic in $\domain_1$, $w > 0$
   in $\closure{\domain}_1 \setminus \set{\xi}$, $w(\xi) = 0$.
   Show that $w$ can be extended to a barrier in $\domain$.
+
+  Let's rewrite this to what I think is meant by the problem:
+  First, $\xi \in \bndrydom$, but $\xi \notin \bndrydom_1$, since $\closure{\domain}_1 \subset \domain$.
+  Next, $w$ is superharmonic on $\domain_1$, and $w > 0$ on $\bndrydom_1$.
+  Then we want to show that we can construct an extension $\tilde{w}$ of $w$ from $\domain_1$ s.t.
+  $\tilde{w}(\xi) = 0$, $\tilde{w} > 0$ on $\bndrydom$, and $\tilde{w}$ is superharmonic on $\domain$.
+
+  Let $m = \inf \limits_{\domain_1} w$ and
+  $$
+  w_0(x) =
+  \begin{cases}
+    \min(m, w(x)) & x \in \closure{\domain}_1\\
+    m & x \in \domain \setminus \closure{\domain}_1
+  \end{cases}
+  $$
+
 \item
   Let $\domain = \set{x^2 + y^2 < 1} \setminus \set{-1 \leq x \leq 0, y = 0}$.
   Show that the function $w := -Re\left( \frac{1}{\ln(z)} \right) = - \frac{\log(r)}{(\log(r))^2 + \theta^2}$ is a local barrier at $\xi = 0$.
+
+  First we need to show that there is a neighborhood $N$ s.t.
+  for all $B \compactcont N$ and all harmonic $h$ in $B$ with $h(x) \leq w(x)$ for $x \in \bndry{B}$,
+  we have $w \geq h$ for $x \in B$.
+
+  This can be shown with complex analysis.
+  First note that since $\domain$ is simply connected and excludes $0$, the logarithm exists on it, and is holomorphic.
+  Next define $W(z) = \frac{1}{\ln(z)}$.
+  $W$ is a composition of holomorphic functions on $\domain$, and thus, its real and imaginary parts are harmonic.
+  Note that $w(x, y) = Re(W(x + i y))$ shows that $w$ is harmonic on $\domain$.
+  From the notes on superharmonic functions, we know that harmonic functions are always superharmonic functions.
+  Therefore, we can take any neighborhood $N \compactcont \domain$ we want and $w$ will be superharmonic on it.
+
+  Next we need to show that in the closure of such a neighborhood, $w(x, y) > 0$ when $x^2 + y^2 \neq 0$.
+
+  Since $0 < r^2 = x^2 + y^2 < 1$, $\log \left( r \right) < 0$.
+  Then since $(\log(r))^2 + \theta^2 > 0$, $-\frac{\log(r)}{(log(r))^2 + \theta^2} > 0$.
+  Since this is true for $\domain$, it's true for $N$ as well.
+
+  Finally we note that $0 \leq \lim \limits_{r \rightarrow 0+} \left| \frac{\ln(r)}{(\ln(r))^2 + \theta^2} \right| \leq \lim \limits_{r \rightarrow 0+} \frac{1}{|\ln(r)|} = 0$,
+  so we must have $w(0) = 0$ for this to be continuous.
+
+  Thus, $w$ is a local barrier for $\xi = 0$ in $\domain$.
 \end{enumerate}
