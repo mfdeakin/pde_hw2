@@ -5,3 +5,112 @@ $$
   u(x, 0) = g(x)
 \end{cases}
 $$
+
+We apply the Fourier transform to everything, (assuming that the transform exists for $u$, $f$, and $g$),
+with $\hat{u} = F[u], \hat{f} = F[f], \hat{g} = F[g]$.
+Then we note that $F[u_t] = \deriv{}{t} F[u]$ and $F[\Delta u] = -|\omega|^2 \hat{u}$.
+This gives us the following conditions:
+
+$$
+\begin{cases}
+  \hat{u}_t + |\omega|^2 \hat{u} - c \hat{u} + \hat{f}(x, t) & t > 0\\
+  \hat{u}(x, 0) = \hat{g}(x)
+\end{cases}
+$$
+
+which is an ODE.
+
+Using the integrating factor $\hat{I}(\omega, t) = \exp((|\omega|^2 - c)t)$, we compute
+
+\begin{align*}
+\deriv{}{t} \left[ \hat{I}(\omega. t) \hat{u}(\omega, t) \right] =& \hat{I}(\omega, t) \hat{f}(\omega, t)\\
+\hat{I}(\omega, t) \hat{u}(\omega, t) =&
+\hat{g}(\omega) + \int_0^t \hat{I}(\omega, \tau) \hat{f}(\omega, \tau) \dd{\tau}
+\end{align*}
+
+or
+
+$$
+\hat{u} = \hat{g}(\omega) e^{(c - |\omega|^2) t} + e^{(c - |\omega|^2) t} \int_0^t e^{(|\omega|^2 - c)\tau} \hat{f}(\omega, \tau) \dd{\tau}
+$$
+
+Then
+\begin{align*}
+  u(x, t) = &\frac{1}{(2 \pi)^{n / 2}} \left[ \int_{\reals^n} \hat{g}(\omega) e^{(c - |\omega|^2) t} e^{i \omega \cdot x} \dd{\omega}
+    + \int_{\reals^n} e^{i \omega \cdot x} e^{(c - |\omega|^2) t}
+        \left( \int_0^t e^{(|\omega|^2 - c)\tau} \hat{f}(\omega, \tau) \dd{\tau} \right) \dd{\omega} \right]\\
+          = &\frac{1}{(2 \pi)^{n / 2}} \left[ G + F \right]
+\end{align*}
+
+We handle the terms separately,
+substituting in the definition of the Fourier transform and making use of Fubini's theorem to interchange integrals,
+since the terms are all integrable over $\reals^n$.
+
+\begin{align*}
+  G = &\int_{\omega \in \reals^n} \int_{y \in \reals^n} e^{(c - |\omega|^2) t + i \omega \cdot x - i \omega \cdot y} g(y) \dy \dd{\omega}\\
+    = &\int_{y \in \reals^n} \int_{\omega \in \reals^n} e^{(c - |\omega|^2) t + i \omega \cdot (x - y)} g(y) \dd{\omega} \dy\\
+    = &e^{c t} \int_{y \in \reals^n} \int_{\omega \in \reals^n} e^{-|\omega|^2 t + i \omega \cdot (x - y)} g(y) \dd{\omega} \dy\\
+    = &e^{c t} \int_{y \in \reals^n} \int_{\omega \in \reals^n} e^{-\left|\omega - \frac{i (x - y)}{2 t}\right|^2 t - \frac{|x - y|^2}{4 t}} g(y) \dd{\omega} \dy\\
+\end{align*}
+
+Note that after integration over a single term, $e^{-|\omega - \frac{i (x - y)}{2 t}|^2}$ results in a constant independent of the other terms.
+So, substituting $z = \omega - \frac{i (x - y)}{2 t}$ with $\dz = \dd{\omega}$ gives
+
+\begin{align*}
+  G = &e^{c t} \int_{y \in \reals^n} \int_{z \in \reals^n} e^{-|z|^2 t} \dz\, e^{-\frac{|x - y|^2}{4 t}} g(y) \dy\\
+    = &e^{c t} (2 t)^{-n / 2} \int_{y \in \reals^n} e^{-\frac{|x - y|^2}{4 t}} g(y) \dy\\
+  (2 \pi)^{-n / 2} G = &e^{c t} (4 \pi t)^{-n / 2} \int_{y \in \reals^n} e^{-\frac{|x - y|^2}{4 t}} g(y) \dy
+\end{align*}
+
+Next we compute the second term, $F$ using similar tricks
+
+\begin{align*}
+F = &\int_{\reals^n} e^{i \omega \cdot x} \left( \int_0^t e^{(|\omega|^2 - c) (\tau - t)} \hat{f}(\omega, \tau) \dd{\tau} \right) \dd{\omega}\\
+  = &(2 \pi)^{-n / 2} \int_{\omega \in \reals^n}
+                       \int_{\tau = 0}^t
+                         \int_{y \in \reals^n}
+                           e^{i \omega \cdot x + (|\omega|^2 - c) (\tau - t) - i \omega \cdot y} f(y, \tau) \dy \dd{\tau} \dd{\omega}\\
+  = &(2 \pi)^{-n / 2} \int_{\tau = 0}^t
+                       e^{c (t - \tau)}
+                       \int_{\omega \in \reals^n}
+                         \int_{y \in \reals^n}
+                           e^{i \omega \cdot (x - y) - |\omega|^2 (t - \tau)} f(y, \tau) \dy \dd{\omega} \dd{\tau}\\
+  = &(2 \pi)^{-n / 2} \int_{\tau = 0}^t
+                       e^{c (t - \tau)}
+                       \int_{\omega \in \reals^n}
+                         \int_{y \in \reals^n}
+                           e^{-\frac{1}{t - \tau} \left| \omega - \frac{i}{2} (x - y)\right|^2}
+                           \cdot e^{\frac{|x - y|^2}{4 (t - \tau)}} f(y, \tau) \dy \dd{\omega} \dd{\tau}\\
+  = &(2 \pi)^{-n / 2} \int_{\tau = 0}^t
+                       e^{c (t - \tau)}
+                       \int_{y \in \reals^n}
+                         e^{\frac{|x - y|^2}{4 (t - \tau)}} f(y, \tau)
+                         \int_{\omega \in \reals^n}
+                           e^{-\frac{1}{t - \tau} \left| \omega - \frac{i}{2} \frac{x - y}{t - \tau}\right|^2} \dd{\omega} \dy \dd{\tau}\\
+\end{align*}
+
+Substituting $z = \omega - \frac{i (x - y)}{2 (t - \tau)}$, with $\dz = \dd{\omega}$ gives
+
+\begin{align*}
+F = &(2 \pi)^{-n / 2} \int_{\tau = 0}^t
+                       e^{c (t - \tau)}
+                       \int_{y \in \reals^n}
+                         e^{\frac{|x - y|^2}{4 (t - \tau)}} f(y, \tau)
+                         \int_{\omega \in \reals^n}
+                           e^{-\frac{|z|^2}{t - \tau}} \dz \dy \dd{\tau}\\
+  = &\int_{\tau = 0}^t (2 (t - \tau))^{-n / 2} e^{c (t - \tau)}
+       \int_{y \in \reals^n} e^{\frac{|x - y|^2}{4 (t - \tau)}} f(y, \tau) \dy \dd{\tau}\\
+\frac{F}{(2 \pi)^{n / 2}} = &\int_{\tau = 0}^t (4 \pi (t - \tau))^{-n / 2} e^{c (t - \tau)}
+                              \int_{y \in \reals^n} e^{\frac{|x - y|^2}{4 (t - \tau)}} f(y, \tau) \dy \dd{\tau}\\
+\end{align*}
+
+We define the fundamental solution $\Phi$:
+$$
+\Phi(x, t) = (4 \pi t)^{-n / 2} e^{c t}  e^{\frac{|x|^2}{4 t}}
+$$
+
+and conclude
+
+$$
+u(x, t) = (\Phi * g)(x, t) + \int_0^t (\Phi * f)(x, \tau) \dd{\tau}
+$$
