@@ -4,8 +4,8 @@
 \usepackage{latexsym}
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage[left=0.5in, right=0.5in, top=0.825in, bottom=0.5in]{geometry}
 \usepackage{fancyhdr}
+\usepackage[margin=1.0in, left=0.5in, right=0.5in, top=1.25in, headsep=10mm, headheight=15mm]{geometry}
 \usepackage{graphicx}
 
 \pagestyle{fancy}
@@ -35,14 +35,22 @@
 \newcommand*\domain[0]{\Omega}
 \newcommand*\bndry[1]{\partial #1}
 \newcommand*\bndrydom[0]{\partial \domain}
+\newcommand*\compactcont[0]{\subset \subset} % U \compactcont V \rightarrow U \subset \closure{U} \subset V, where U, V are (open) domains
+
+\newcommand*\ball[2]{B_{#2}(#1)}
+
+\newcommand*\limitto[2]{\lim \limits_{#1 \rightarrow #2}}
 
 \newcommand{\dd}[1]{\;\mathrm{d}#1}
 \newcommand{\dx}{\dd{x}}
 \newcommand{\dy}{\dd{y}}
+\newcommand{\dz}{\dd{z}}
 \newcommand{\ds}{\dd{s}}
 \newcommand{\dt}{\dd{t}}
 \newcommand*\pderiv[2]{\frac{\partial #1}{\partial #2}}
+\newcommand*\nthpderiv[3]{\frac{\partial^{#3} #1}{\partial #2^{#3}}}
 \newcommand*\deriv[2]{\frac{\dd{#1}}{\dd{#2}}}
+\newcommand*\nthderiv[3]{\frac{\dd{^{#3} #1}}{\dd{#2^{#3}}}}
 
 \DeclareMathOperator{\res}{res}
 \DeclareMathOperator{\sign}{sign}
@@ -50,7 +58,6 @@
 \DeclareMathOperator{\partition}{Partition}
 
 \begin{document}
-\vspace*{-5mm} % Move the first question slightly further away from the header bar
 \begin{enumerate}
 \item \input{hw2-p1.tex}
 \item \input{hw2-p2.tex}
