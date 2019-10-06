@@ -22,9 +22,8 @@
   Furthermore, $I[u_k] \leq \frac{C}{k}$ for some positive $C$ indepenedent of $k$,
   and thus, $\lim \limits_{k \rightarrow \infty} I[u_k] = 0$ is our minimal energy.
   However, $\lim \limits_{k \rightarrow \infty} u_k$ does not have piecewise continuous derivatives though, so it's not in the admissible set.
-  Thus, $\inf_{u} I[u] = 0$.
+  Thus, $\inf_{u} I[u] = 0$, and now we must show it's not actually attainable.
 
-  Next we want to show that $I[u] > 0$ for any element in the admissible set.
   By the intermediate value theorem, since $u(-1) = 0$ and $u(1) = 1$, there is some $y \in (-1, 1)$ s.t. $u'(y) = \frac{1}{2}$.
   Then since $u'(x)$ is piecewise continuous, we can choose some $\delta > 0$ s.t. $0 < \epsilon < u'(x)$ whenever $|x - y| < \delta$.
   Then $\int \limits_{-1}^{1} x^2 u'(x)^2 \dx \geq \int \limits_{y - \delta}^{y + \delta} x^2 \epsilon^2 \dx > 0$.
@@ -50,9 +49,8 @@
   Furthermore, $I[u_k] \leq \frac{k - 1}{k} + \frac{(1 + 4 k^2)^{1/4}}{k}$,
   and thus, $\lim \limits_{k \rightarrow \infty} I[u_k] = 1$ is our minimal energy.
   However, $\lim \limits_{k \rightarrow \infty} u_k$ does not have piecewise continuous derivatives though, so it's not in the admissible set.
-  Thus, $\inf_{u} I[u] = 1$.
+  Thus, $\inf_{u} I[u] = 1$, and now we must show it's not actually attainable; this is largely the same process as in 2a.
 
-  Next we want to show that $I[u] > 0$ for any element in the admissible set; this is largely the same as in 2a.
   By the intermediate value theorem, since $u(0) = 0$ and $u(1) = 1$, there is some $y \in (0, 1)$ s.t. $u'(y) = 1$.
   Then since $u'(x)$ is piecewise continuous, we can choose some $\delta > 0$ s.t. $0 < \epsilon < u'(x)$ whenever $|x - y| < \delta$.
   Then
