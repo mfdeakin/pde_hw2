@@ -8,12 +8,102 @@ $$
   \Phi(x - y, t) \leq C_n |x - y|^{-n}
   $$
   (Hint: Maximize the function in $t$)
+
+  Following the hint, we compute
+
+  $$
+  0 = \deriv{\Phi(r, t)}{t}
+    = - \frac{n}{2} (4 \pi t)^{-\frac{n}{2} - 1} 4 \pi e^{-\frac{r^2}{4 t}} + (4 \pi t)^{-n / 2} e^{-\frac{r^2}{4 t}} \left( \frac{r^2}{4 t^2} \right)
+  $$
+
+  Then, after some simplification we get
+
+  $$
+  \frac{n}{2} (4 \pi t)^{-\frac{n}{2} - 1} 4 \pi = (4 \pi t)^{-n / 2} \left( \frac{r^2}{4 t^2} \right)
+  $$
+
+  which leaves us with just
+
+  $$
+  t_{crit} = \frac{r^2}{2 n}
+  $$
+
+  Then for this to be a local maximum, we need $\nthderiv{\Phi}{t}{2}(r, t_{crit}) < 0$.
+  After some computation, we arrive at
+
+  $$
+  \nthderiv{\Phi}{t}{2}(r, t_{crit}) = -\frac{2 n^3 \left( \frac{2 \pi r}{n} \right)^{-n / 2} e^{-n / 2}}{r^4} < 0
+  $$
+
+  Thus, this is a local maximum. Then
+
+  $$
+  \Phi(r, t) \leq \Phi(r, t_{crit}) = \left( r \sqrt{\frac{2 \pi}{n}} \right)^{-n} e^{-n / 2} \leq C r^{-n}
+  $$
+
+  for some $C$ independent of $R$.
+
 \item
   Let $n = 1$ and $f(x)$ be a bounded measurable function s.t. $f(x_0 -)$ and $f(x_0+)$ exists.
   Show that
   $$
-  \lim \limits_{t \rightarrow 0} \int_R \Phi(x  - x_0, t) f(y) dy = \frac{1}{2} (f(x_0-) + f(x_0+))
+  \limitto{t}{0} \int_R \Phi(x_0  - y, t) f(y) \dy = \frac{1}{2} (f(x_0-) + f(x_0+))
   $$
+
+  $f$ is bounded and measurable.
+  This is essentially a generalization of the proof for Theorem 2.3.1 in the book.
+
+  First define $u(x, t) = \int_\reals \Phi(x_0 - y, t) f(y) \dy$.
+  Then consider $u(x, t) - \frac{1}{2} f(x_0+) - \frac{1}{2} f(x_0-)$
+  Since $f(x_0-)$ and $f(x_0+)$ exists, given any $\epsilon > 0$, we can choose $\delta > 0$ s.t.
+  for $|y - x_0| < \delta$, we have
+
+  $$
+  \begin{cases}
+    |f(y) - f(x_0+)| < \epsilon & y < x_0\\
+    |f(y) - f(x_0-)| < \epsilon & y > x_0\\
+  \end{cases}
+  $$
+
+  Now we write
+
+  \begin{align*}
+  u(x_0, t) & - \frac{1}{2} f(x_0+) - \frac{1}{2} f(x_0-)\\
+    = & \int_\reals \Phi(x_0 - y, t) \left[  f(y) - \frac{1}{2} f(x_0+) - \frac{1}{2} f(x_0-) \right] \dy\\
+    = & \int_{B_\delta(x_0)} \Phi(x_0 - y, t) \left[  f(y) - \frac{1}{2} f(x_0+) - \frac{1}{2} f(x_0-) \right] \dy\\
+      & + \int_{B_\delta(x_0)^c} \Phi(x_0 - y, t) \left[  f(y) - \frac{1}{2} f(x_0+) - \frac{1}{2} f(x_0-) \right] \dy\\
+    = & I_t + J_t
+  \end{align*}
+
+  $\limitto{t}{0} J_t = 0$ as shown in the book,
+  as $f(y) - \frac{1}{2} f(x_0+) - \frac{1}{2} f(x_0+) < C$ since $f$ is bounded,
+  letting us bound
+  $|J_t| < \frac{C}{\sqrt{t}} \int_{\ball{x_0}{\delta}^c} e^{-\frac{|x_0 - y|^2}{4 t}} \dy \leq C \int_{\ball{x_0}{(\delta / \sqrt{t})}^c} e^{-\frac{|\tilde{x}_0 - \tilde{y}|^2}{16}} \dd{\tilde{y}}$
+
+  Thus we only need to concern ourselves with $\limitto{t}{0} I_t$.
+
+  \begin{align*}
+  I_t = &\int_{B_\delta(x_0)} \Phi(x_0 - y, t) \left[ f(y) - \frac{1}{2} f(x_0+) - \frac{1}{2} f(x_0-) \right] \dy\\
+      = &\int \limits_{x_0 - \delta}^{x_0} \Phi(x_0 - y, t) \left[ f(y) - \frac{1}{2} f(x_0+) - \frac{1}{2} f(x_0-) \right] \dy\\
+        &+ \int \limits_{x_0}^{x_0 + \delta} \Phi(x_0 - y, t) \left[ f(y) - \frac{1}{2} f(x_0+) - \frac{1}{2} f(x_0-) \right] \dy\\
+      = &-\int \limits_{0}^{\delta} \Phi(x_0 - (x_0 - z), t) \left[ f(x_0 - z) - \frac{1}{2} f(x_0+) - \frac{1}{2} f(x_0-) \right] \dz\\
+        &+ \int \limits_{0}^{\delta} \Phi(x_0 - (x_0 + z), t) \left[  f(x_0 + z) - \frac{1}{2} f(x_0+) - \frac{1}{2} f(x_0-) \right] \dz\\
+      = &-\int \limits_{0}^{\delta} \Phi(z, t) \left[ f(x_0 - z) - \frac{1}{2} f(x_0+) - \frac{1}{2} f(x_0-) \right] \dz\\
+        &+ \int \limits_{0}^{\delta} \Phi(-z, t) \left[  f(x_0 + z) - \frac{1}{2} f(x_0+) - \frac{1}{2} f(x_0-) \right] \dz\\
+      = &\int \limits_{0}^{\delta} \Phi(z, t) \left[ f(x_0 + z) - \frac{1}{2} f(x_0+) - \frac{1}{2} f(x_0-) - f(x_0 - z) + \frac{1}{2} f(x_0+) + \frac{1}{2} f(x_0-)\right] \dz\\
+  \end{align*}
+
+  Then we can bound $|I_t|$ by noting that $|f(x_0 + z) - f(x_0 - z)| < |f(x_0 + z) - f(x_0)| + |f(x_0) - f(x_0 - z)| \leq 2 \epsilon$.
+  \begin{align*}
+  |I_t| \leq &\int \limits_{0}^{\delta} \left| \Phi(z, t) \left[ f(x_0 + z) - f(x_0 - z) \right] \right| \dz\\
+        \leq &\int \limits_{0}^{\delta} \Phi(z, t) \left| f(x_0 + z) - f(x_0 - z) \right| \dz\\
+        \leq &\int \limits_{0}^{\delta} \Phi(z, t) 2 \epsilon \dz\\
+        = & 2 \epsilon\\
+  \end{align*}
+
+  Thus, $\limitto{t}{0} \left|u(x_0, t) - \frac{f(x_0+) + f(x_0-)}{2}\right| \leq 3 \epsilon$,
+  proving our claim.
+
 \item
   Let $u$ satisfy
   $$
@@ -23,5 +113,13 @@ $$
   \end{cases}
   $$
   Suppose that $f$ is continuous and has compact support.
-  Show that $\lim \limits_{t \rightarrow +\infty} u(x, t) = 0$ for all $x$
+  Show that $\limitto{t}{+\infty} u(x, t) = 0$ for all $x$
+
+  First, note that since $f$ has compact support, $\exists R > 0$ s.t.
+  $f(B_R^c) = \set{0}$.
+  Next, consider $R' >> R$ and some positive $T >> t$.
+  On $B_{R'} \times [0, T]$, the heat equation has a unique solution.
+  Then, since the fundamental solution of the heat equation gives us a solution on the domain, it is the solution.
+  That is, we can write $u(x, t) = \int_{B_R'} \Phi(x - y, t) f(y) \dy$.
+  Since $f$ has compact support, we can reduce this to $u(x, t) = \int_{B_R} \Phi(x - y, t) f(y) \dy$.
 \end{enumerate}
