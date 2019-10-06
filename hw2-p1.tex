@@ -5,16 +5,45 @@
   Show that $w$ can be extended to a barrier in $\domain$.
 
   (note $w$ is a local barrier in $\domain_1$, and $\zeta \in \domain_1$.
-  So essentially this is straight from the notes for Perron's Method)
+  So essentially this is straight from the notes for Perron's Method, though with more detail about why the harmonic function of any ball
+  is at most the superharmonic function in the intersection of the ball and a small ball around $\xi$)
 
-  Let $m = \inf \limits_{\domain_1} w$ and
+  Choose $r > 0$ s.t. $B = B_r(\xi) \compactcont \domain_1$, and define $m = \inf_{\domain_1 \setminus B}$.
+  Then the function
   $$
-  w_0(x) =
+  W(x) =
   \begin{cases}
-    \min(m, w(x)) & x \in \closure{\domain}_1\\
-    m & x \in \domain \setminus \closure{\domain}_1
+    w_1(x) = \min(m, w(x)) & x \in B \cap \closure{\domain}\\
+    w_2(x) = m & \text{otherwise}
   \end{cases}
   $$
+
+  This is a barrier at $\xi$ in $\domain$.
+  First we show that $W$ is continuous in $\domain$.
+  Since the minimum of two continuous functions is necessarily continuous, $w_1$ is continuous in $B \cap \closure{\domain}$.
+  $W$ is also continuous in $B^c \cap \closure{\domain}$, as it's just constant there.
+  Finally, we note $\lim_{y \rightarrow z \in \bndry{B} \cap \closure{\domain}} W(y) = m$, since $\sup_{x \in B \cap \closure{\domain}} w_1(x) = m$.
+  If not, then $\exists x \in \bndry{B}$ s.t. $w_1(x) < m$.
+  But this contradicts the definition of $m$, so this is impossible, and thus, $W$ is continuous on $\domain$.
+
+  Next we need to show that $W$ is superharmonic in $\domain$.
+  First, we note that $w_1$ and $w_2$ are superharmonic in their domains; $w_1$ by definition, and $w_2$ because it's just a constant.
+  Thus, to show that $W$ is superharmonic in $\domain$, we only need to consider every ball $B'$ which intersects the boundary of $B$,
+  and show that any harmonic function $h$ in $B'$ with $h \leq w$ on $\bndry{B'}$ will have $h \leq w$ in $B'$ as well.
+
+  For $x \in B' \cap B^c \cap \domain$, $W(x) = m = \sup_{y \in \domain} W(y)$.
+  By the maximum priniple, since on $B'$ $h \leq m$, we have $h \leq m$.
+  Thus, $h \leq W(x)$ for $x \in B' \cap B^c \cap \domain$.
+
+  For $x \in B' \cap B \cap \domain$, since $h$ is harmonic, $h \leq W(x)$ on $\bndry{B' \cap B \cap \Omega}$,
+  and $w_1$ is superharmonic in $B' \cap B \cap \Omega$, we have $h \leq W(x)$ in $B' \cap B \cap \Omega$.
+  On $\bndry{B' \cap B}$, we have $h \leq W$, as $h \leq W$ on $\bndry{B'}$ and $h \leq m = W(y)$ for $y$ in $B^c \cap \Omega$.
+  Then if we lift (or I guess lower?) $W$ to a harmonic function $g$ on $B$, $h \leq g \leq W$ on $B' \cap B \cap \Omega$.
+  This follows from Lemma 2.2.3 from the notes on Perron's method.
+
+  Thus, $W$ is superharmonic in $\domain$.
+  Since $W(\xi) = w_1(\xi) = 0 \leq m$, $W(y) = m > 0$ on $\bndrydom \setminus B$, and $W(y) = w_1(y) > 0$ on $\bndrydom \cap B$,
+  $W$ fulfills all of the requirements to be a barrier at $\xi$ relative to $\domain$.
 
 \item
   Let $\domain = \set{x^2 + y^2 < 1} \setminus \set{-1 \leq x \leq 0, y = 0}$.
