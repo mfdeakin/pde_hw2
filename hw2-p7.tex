@@ -13,17 +13,75 @@
   \max \limits_{\closure{U}_T} > \max \limits_{\partial' U_T} u(x, t)
   $$
   (Hint: Let $f = 0$ and $g \in C_0^\infty([-1, 1]), g \geq 0$ and choose a small $T$.
+
+  Following the hint, we consider the case
+  $$
+  \begin{cases}
+    u_{tt} = u_{xx}, & -1 < x < 1, 0 < t < T\\
+    u(x, 0) = 0\\
+    0 \leq u_t(x, 0) = g(x) \in C_0^\infty([-1, 1]) 
+  \end{cases}
+  $$
+  and choose $u_t(x, 0) = 0$ when $|x| > 1/2$
+
+  We can extend our problem to this domain by the reflection principle.
+  We define $\tilde{u}: \reals \times (0, \infty) \rightarrow \reals$ in the following manner:
+  If $-1 < x < 1$, take $\tilde{u}(x, t) = u(x, t)$
+  If $x < -1$, take $\tilde{u}(x, t) = -\tilde{u}(-(x + 1) - 1, t) = -\tilde{u}(-x - 2, t)$
+  If $x > 1$, take $\tilde{u}(x, t) = -\tilde{u}(-(x - 1) + 1, t) = -\tilde{u}(-x + 2, t)$
+
+  We generalize this by defining $I_k = (-1 + 2 k, 1 + 2 k)$ for any integer $k$;
+  then
+  $$
+  \tilde{u}(x, t) =
+  \begin{cases}
+    u(x - 2 k, t) & x \in I_{2 k}, 0 < t < T\\
+    -u(-x + 2 (k + 1), t) & x \in I_{2 k + 1}, 0 < t < T\\
+  \end{cases}
+  $$
+  $$
+  \tilde{g}(x, t) =
+  \begin{cases}
+    g(x - 2 k, t) & x \in I_{2 k}, 0 < t < T\\
+    -g(-x + 2 (k + 1), t) & x \in I_{2 k + 1}, 0 < t < T\\
+  \end{cases}
+  $$
+
+  Then
+  $$
+  \begin{cases}
+    \tilde{u}_{tt} = \tilde{u}_{xx} & x \in \reals \times (0, T)\\
+    \tilde{u}(x, 0) = 0 & x \in \reals\\
+    \tilde{u}_t(x, 0) = \tilde{g}(x) & x \in \reals\\
+  \end{cases}
+  $$
+  is solved by d'Alembert's formula:
+  $$
+  \tilde{u}(x, t) = \frac{1}{2} \int \limits_{x - t}^{t + x} \tilde{g}(y) \dy
+  $$
+  Considering $T < \frac{1}{4}$ ensures us that for $\frac{3}{4} < |x| < 1$
+  $$
+  \tilde{u}(x, t) = \frac{1}{2} \int \limits_{x - t}^{x + x} \tilde{g}(y) \dy = 0
+  $$
+  as $\frac{1}{2} < x + t < \frac{3}{2}$, so $\tilde{g} = 0$.
+  For $|x| < \frac{1}{4}$, we have $\tilde{g}(y) > 0$ for a set of non-zero measure.
+  Since $\tilde{g}(y) \geq 0$, that means that the integral must be non-zero, so $\sup u(x, t) > 0$.
+  But $\tilde{u}(\pm 1, t) = u(\pm 1, t) = 0$ for $0 < t < T$ and $u(x, 0) = 0$ for $-1 < x < 1$.
+  Thus, on the boundaries of $(-1, 1) \times (0, T)$, $\sup u(x, t) = 0$.
+  This shows that the maximum principle does not necessarily hold for the wave equation.
+
 \item
   Let $u$ solve the initial value problem for the wave equation in one dimension
   $$
   \begin{cases}
-    u_{tt} = u_{xx} & \text{in} \reals \times (0, +\infty)\\
+    u_{tt}(x, t) = u_{xx}(x, t) & (x, t) \in \reals \times (0, +\infty)\\
     u(x, 0) = f(x)\\
     u_t(x, 0) = g(x)
   \end{cases}
   $$
   where $f$ and $g$ have compact support in $\reals$.
-  Let $k(t) = \frac{1}{2} \int u_t(x, t)^2 \dt$ be the potential energy and $p(t) = \frac{1}{2} u_x^2(x, t) \dx$ be the potential energy.
+  Let $k(t) = \frac{1}{2} \int \limits_{-\infty}^{\infty} u_t(x, t)^2 \dx$ be the kinetic energy
+  and $p(t) = \frac{1}{2} \int \limits_{-\infty}^{\infty} u_x(x, t)^2 \dx$ be the potential energy.
   Show that
   \begin{enumerate}
   \item
@@ -32,3 +90,87 @@
     $k(t) = p(t)$ for all large enough time $t$
   \end{enumerate}
 \end{enumerate}
+
+First we show that $k(t) = p(t)$ for large enough time $t$:
+
+Assuming $f \in C^2(\reals)$, $g \in C^1(\reals)$, d'Alembert's formula gives
+$$
+2 u(x, t) = f(x + t) + f(x - t) + \int \limits_{x - t}^{x + t} g(y) \dy
+$$
+Differentiating and squaring these gives
+\begin{align*}
+  4 u_x(x, t)^2 = &[f'(x + t) + f'(x - t) + g(x + t) - g(x - t)]^2\\
+                %% = &g(x - t) - 2 g(x - t) g(x + t) - 2 g(x - t) f'(x - t) - 2 g(x - t) f'(x + t) + g(x + t)^2\\
+                %%   &+ 2 g(x + t) f'(x - t) + 2 g(x + t) f'(x + t) + f'(x - t)^2 + 2 f'(x - t) f'(x + t) + f'(x + t)^2\\
+  4 u_t(x, t)^2 = &[f'(x + t) - f'(x - t) + g(x + t) + g(x - t)]^2\\
+                %% = &g(x - t) + 2 g(x - t) g(x + t) - 2 g(x - t) f'(x - t) + 2 g(x - t) f'(x + t) + g(x + t)^2\\
+                %%   &- 2 g(x + t) f'(x - t) + 2 g(x + t) f'(x + t) + f'(x - t)^2 - 2 f'(x - t) f'(x + t) + f'(x + t)^2
+\end{align*}
+
+Then we have
+\begin{align*}
+  2 k(t) = &\int \limits_{-\infty}^{\infty} [f'(x + t) + f'(x - t) + g(x + t) - g(x - t)]^2 \dx\\
+  2 p(t) = &\int \limits_{-\infty}^{\infty} [f'(x + t) - f'(x - t) + g(x + t) + g(x - t)]^2 \dx
+\end{align*}
+Since $f$ and $g$ have compact support, there is a $R > 0$ s.t. $f(\ball{0}{R}^c) = f'(\ball{0}{R}^c) = g(\ball{0}{R}^c) = \set{0}$.
+Then for a given $t$ we can split the integral limits into an integration over $0$ and over a non-zero term.
+\begin{align*}
+  2 k(t) = &0 + \int \limits_{-R - t}^{R + t} [f'(x + t) + f'(x - t) + g(x + t) - g(x - t)]^2 \dx\\
+  2 p(t) = &0 + \int \limits_{-R - t}^{R + t} [f'(x + t) - f'(x - t) + g(x + t) + g(x - t)]^2 \dx
+\end{align*}
+Subtracting the two and removing terms leaves us with
+\begin{align*}
+  2 k(t) - 2 p(t) = \int \limits_{-R - t}^{R + t} &[f'(x + t) + f'(x - t) + g(x + t) - g(x - t)]^2\\
+                                              &- [f'(x + t) - f'(x - t) + g(x + t) + g(x - t)]^2 \dx\\
+                  %% &= \int \limits_{-R - t}^{R + t}
+                  %%      &g(x - t)^2 - 2 g(x - t) g(x + t) - 2 g(x - t) f'(x - t) - 2 g(x - t) f'(x + t) + g(x + t)^2\\
+                  %% &    &+ 2 g(x + t) f'(x - t) + 2 g(x + t) f'(x + t) + f'(x - t)^2 + 2 f'(x - t) f'(x + t) + f'(x + t)^2\\
+                  %% &    &- g(x - t)^2 - 2 g(x - t) g(x + t) + 2 g(x - t) f'(x - t) - 2 g(x - t) f'(x + t) - g(x + t)^2\\
+                  %% &    &+ 2 g(x + t) f'(x - t) - 2 g(x + t) f'(x + t) - f'(x - t)^2 + 2 f'(x - t) f'(x + t) - f'(x + t)^2 \dx
+                  = \int \limits_{-R - t}^{R + t} &-4 g(x - t) g(x + t) - 4 g(x - t) f'(x + t)\\
+                                              &+ 4 g(x + t) f'(x - t) + 4 f'(x - t) f'(x + t) \dx
+\end{align*}
+For this to be non-zero, we need both $x + t < R$ and $x - t > -R$,
+as otherwise the remaining terms inside the integral all go to zero.
+
+If we consider $t > R$, then $x < 0$ must hold for $x + t \in \ball{0}{R}$.
+Similarly, $x > 0$ must hold for $x - t \in \ball{0}{R}$.
+But $\set{x > 0} \cap \set{x < 0} = \emptyset$, so the integral goes to $0$ everywhere.
+Thus, for large enough $t$, $k(t) - p(t) = 0$.
+
+
+To show that $k(t) + p(t)$ is constant, we show that $\deriv{k + p}{t} = 0$.
+
+First,
+$k(t) + p(t) = \int \limits_{-\infty}^{\infty} u_t(x, t)^2 \dx + \int \limits_{-\infty}^{\infty} u_x(x, t)^2 \dx$
+
+Since both of these integrals converge, we can combine them:
+$k(t) + p(t) = \int \limits_{-\infty}^{\infty} u_t(x, t)^2 + u_x(x, t)^2 \dx$
+
+Then, since $u$ has compact support (shown in the previous part),
+for a given $t$ we can choose an $R$ s.t. $u(\ball{0}{R}^c) = u_x(\ball{0}{R}^c) = u_t(\ball{0}{R}^c) = \emptyset$
+Then our integral becomes
+
+$$
+k(t) + p(t) = \int \limits_{-R}^{R} u_t(x, t)^2 + u_x(x, t)^2 \dx
+$$
+
+Since $u_t$ and $u_x$ are continuous on $[-R, R]$, they are uniformly continuous,
+so we can interchange the derivative and integral:
+
+\begin{align*}
+\deriv{k(t) + p(t)}{t} &= \frac{1}{2} \deriv{}{t} \int \limits_{-R}^{R} u_t(x, t)^2 + u_x(x, t)^2 \dx
+                        = \int \limits_{-R}^{R} u_t(x, t) u_{tt}(x, t) + u_x(x, t) u_{xt}(x, t) \dx
+\end{align*}
+Integrating the second term by parts gives us
+\begin{align*}
+  \deriv{k(t) + p(t)}{t} &= u_x(R, t) u_t(R, t) - u_x(-R, t) u_t(-R, t)
+                            + \int \limits_{-R}^{R} u_t(x, t) u_{tt}(x, t) - u_{xx}(x, t) u_{t}(x, t) \dx\\
+                         &= \int \limits_{-R}^{R} u_t(x, t) u_{tt}(x, t) - u_{xx}(x, t) u_{t}(x, t) \dx
+\end{align*}
+Then, noting that by our definition $u_{xx} = u_{tt}$ leaves us with an integral containing $0$
+\begin{align*}
+  \deriv{k(t) + p(t)}{t} &= \int \limits_{-R}^{R} u_t(x, t) u_{tt}(x, t) - u_{tt}(x, t) u_{t}(x, t) \dx = 0
+\end{align*}
+
+Thus, the derivative of the sum of our energies is 0, and the sum must be constant.
