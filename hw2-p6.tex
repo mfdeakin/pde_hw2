@@ -8,19 +8,58 @@ $$
 $$
 \begin{enumerate}
 \item
-  Show that $L[u] \geq 0$, then
+  Show that if $L[u] \geq 0$, then
   $$
   \max \limits_{\closure{\domain}_T} u \leq e^{C_4 T} \max \limits_{\partial' \domain_T} u^+
   $$
-  Here $\domain_T = (0, L) \times (0, T), \bndrydom_T = \bndrydom_T \setminus ((0, L) \times \set{T})$, and $u^+ = \max(u, 0)$.\\
+  Here $\domain_T = (0, L) \times (0, T), \bndry{'\domain_T} = \bndrydom_T \setminus ((0, L) \times \set{T})$, and $u^+ = \max(u, 0)$.\\
   (Hint: Consider the function $v := u e^{-C_4 t}$)
+
+  Incomplete...
+
+  First, we follow the hint and compute:
+  \begin{align*}
+  L[v] = &(a u_{xx} + b u_x + (c + C_4) u - u_t)e^{-C_4 t} = L[u] e^{-C_4 t} + C_4 u e^{-C_4 t} \geq C_4 u e^{-C_4 t}
+  \end{align*}
+
+  Let $(x^*, t^*)$ be the maximum of $u$ in $\closure{\domain}_T$.
+  First assume that $u(x^*, t^*) > 0$, since otherwise we're in a trivial case, and $u(x^*, t^*) \leq 0 = e^{C_4 T}\max_{\bndry'\domain} u^+$.
+
+  We first consider the case where $(x^*, t^*) \in \domain_T$.
+  Since this is a maximum, we have $u_t(x^*, t^*) = u_x(x^*, t^*) = 0$
+  and $u_{xx}(x^*, t^*) <  0$, $u_{tt}(x^*, t^*) < 0$ (assuming $u_{tt}$ exists).
+  Then
+  \begin{align*}
+  L[u](x^*, t^*) = a(x^*, t^*) u_{xx}(x^*, t^*) + c(x^*, t^*) u(x^*, t^*) \geq 0
+  \end{align*}
+  Then since $a > 0$ and $u_{xx} < 0$, we have $\sign(c) = \sign(u)$, so $C_4 \geq c > 0$, and therefore $L[u] \geq L[u] e^{-C_4 t}$.
+
+  Now we consider $(x^*, t^*) \in \bndry'\domain_T$.
+  In $(0, L) \times \set{0}$, at $(x^*, t^*)$, we trivially satisfy this maximum principle, since $e^{C_4 t^*} = 1$,
+  and $\max_{\closure{\domain}} u = \max_{\bndry'\domain_T} u^+$.
+
+  For the other cases we just need to show that $C_4 \geq 0$,
+  which we can do by showing that $\exists (y, s)$ s.t. $c(y, s) \geq 0$.
+  In $\set{0} \times (0, T)$, we only require that $u_x \leq 0$, $u_t = 0$, and $u_{tt} < 0$.
+  In $\set{L} \times (0, T)$, we only require that $u_x \geq 0$, $u_t = 0$, and $u_{tt} < 0$ (if it exists).
+  In these cases, we have
+  $$
+  L[u](x^*, t^*) = a(x^*, t^*) u_{xx}(x^*, t^*) + b(x^*, t^*) u_x(x^*, t^*) + c(x^*, t^*) u(x^*, t^*) \geq 0
+  $$
+
 \item
   Prove the uniqueness of the initial value problem
   $$
   \begin{cases}
-    L u(x, t) = f(, t) & x \in \domain_T\\
+    L u(x, t) = f(x, t) & x \in \domain_T\\
     u(x, 0) = \phi(x) & x \in \domain\\
     u(x, t) = g(x, t) & x \in \bndrydom, t \in (0, T]
   \end{cases}
   $$
+
+  Assume we have two solutions $u$ and $v$ which solve the problem.
+  Then $L[u - v] = L[u] - L[v] = 0$, and $u - v = 0$ on the parabolic cylinder's boundary.
+  Then since $L[u - v] \geq 0$, we know from part a that $\max_{\closure{\domain}}u - v \leq e^{C_4 t} \max_{\boundary' \domain} (u - v)^+ = 0$.
+  We also know that $L[v - u] \leq 0$, so $\max_{\closure{\domain}}v - u \leq e^{C_4 t} \max_{\boundary' \domain} (v - u)^+ = 0$.
+  Thus, $0 \leq u - v \leq 0$, so $u = v$, proving uniqueness.
 \end{enumerate}
