@@ -117,9 +117,19 @@ $$
 
   First, note that since $f$ has compact support, $\exists R > 0$ s.t.
   $f(B_R^c) = \set{0}$.
-  Next, consider $R' >> R$ and some positive $T >> t$.
-  On $B_{R'} \times [0, T]$, the heat equation has a unique solution.
-  Then, since the fundamental solution of the heat equation gives us a solution on the domain, it is the solution.
-  That is, we can write $u(x, t) = \int_{B_R'} \Phi(x - y, t) f(y) \dy$.
+  Next, consider some positive $T >> t$ and an associated $R' >> R$.
+  On $B_{R'} \times [0, T]$, the heat equation has a unique solution if we assume that it's between
+  $-\epsilon$ and $\epsilon$ on the boundary of $\ball{0}{R'}$ for $0 < t < T$.
+  (n.b. This makes sense from a physical point of view; I haven't come up with a mathematical justification yet.
+  A potentially just as bad alternative is to assume that our solution is bounded by an exponential growth estimate,
+  but that also appears to rely on a set value of $T$ in addition to bringing in the assumption on growth rates.)
+
+  Next, since the fundamental solution of the heat equation gives us a solution on the domain, it is the solution.
+  That is, we can write $u(x, t) = \int_{\ball{0}{R'}} \Phi(x - y, t) f(y) \dy$.
   Since $f$ has compact support, we can reduce this to $u(x, t) = \int_{B_R} \Phi(x - y, t) f(y) \dy$.
+  We can also interchange the integral and a limit (if we ignore that we chose $R'$ based on $T$ so the boundary conditions hold...), so
+  $$
+  \limitto{t}{\infty} u(x, t) = \int_{\ball{0}{R}} \limitto{t}{\infty} \Phi(x - y, t) f(y) \dy = \int_{\ball{0}{R}} 0 \dy = 0
+  $$
+
 \end{enumerate}
