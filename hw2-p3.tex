@@ -5,3 +5,52 @@ $$
   u(x) = \pderiv{u}{\nu}(x) = 0 & x \in \bndrydom
 \end{cases}
 $$
+
+Dirichlet's principle for $\Delta u = f(x)$ says that a function $u$ that satisifes
+
+$$
+\begin{cases}
+  -\Delta u = f & \text{ in } \domain\\
+  u = g & \text{ on } \bndrydom
+\end{cases}
+$$
+will minimize
+$$
+I[w] = \int_\domain \frac{1}{2} |D w|^2 - w f dx
+$$
+for the admissible set $A = \set{w \in C^1(\domain) \cap C^0(\closure{\domain}, w = g \text{ on } \bndrydom}$
+
+%% Take $\Delta w$
+%% $$
+%% I[w] = \int_\domain \frac{1}{2} |D (\Delta w)|^2 - (\Delta w) f dx
+%% $$
+
+%% Apply Green's theorem
+
+We guess that the energy functional
+$$
+E[w] = \int_\domain 0 \dx = \int_\domain \frac{1}{2} |\Delta w|^2 - \Delta w f \dx
+$$
+is minimized by a solution to our problem with the admissible set
+$$
+A = \set{w \in C^1(\domain) \cap C^0(\closure{\domain}), w = g \text{ on } \bndrydom}
+$$
+Next, assume $u$ satisifies the problem statement.
+Then we consider the integral below:
+\begin{align*}
+0 = \int_\domain (-\Delta^2 u - f) (\Delta u - \Delta w) \dx
+\end{align*}
+Integrating by parts gives and noting that $\pderiv{\Delta u}{\nu} = \Delta \pderiv{u}{\nu} = 0$ gives
+\begin{align*}
+  0 = &\int_\domain D (\Delta u) \cdot D (\Delta u - \Delta w) - (\Delta u - \Delta w) f \dx\\
+    = &-\int_\domain D(\Delta u) \cdot D (\Delta u - \Delta w) - (\Delta u - \Delta w) f \dx
+        + \int_{\bndrydom} (\Delta u - \Delta w) \pderiv{\Delta u}{\nu} \dd{S}\\
+    = &-\int_\domain D(\Delta u) \cdot D (\Delta u - \Delta w) - (\Delta u - \Delta w) f \dx
+\end{align*}
+Then, rearranging terms and applying Cauchy Schwarz gives
+\begin{align*}
+   \int_\domain (D \Delta u) \cdot (D \Delta w) - \Delta w f \dx = &\int_\domain |D(\Delta u)|^2 - \Delta u f \dx\\
+     \leq &\int_\domain \frac{1}{2} (|D(\Delta u)|^2 + |D(\Delta w)|^2) - \Delta w f \dx
+\end{align*}
+
+Thus, $E[u] \leq E[w]$ when $w \in A$.
